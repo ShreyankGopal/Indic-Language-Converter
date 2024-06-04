@@ -16,6 +16,9 @@ It has been made in a way that helps to add more languages without much changes 
 - React.js
 - Bootstrap
 - HTML,CSS
+#### Translation
+- Python
+- Google translate API
 
 ## Bibliography
 - https://freefrontend.com/css-loaders/#google_vignette Author Jon Kantner, for the loading        page
