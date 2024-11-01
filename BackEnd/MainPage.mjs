@@ -94,7 +94,7 @@ async function TranslateHtmlElements(dictionary, from, to) {
     await Promise.all(
         keys.map(async (key) => {
             try {
-                
+                console.log('translating from '+from+" to "+to)
                 const translatedText = await translatePromise(dictionary[key], from, to);
                 dict.set(key, translatedText);
                 
@@ -109,7 +109,8 @@ async function TranslateHtmlElements(dictionary, from, to) {
 }
 
 var content=[]
-for(var i=0;i<4;i++){
+for(var i=0;i<3;i++){
+    console.log(lang[i])
     content.push(await TranslateHtmlElements(contentE,'en',lang[i]))
     console.log(content[i])
 
@@ -129,6 +130,7 @@ router.get("/",async (req,res)=>{
         res.send(content[0]);
     }
     else if(to==='te'){
+        console.log(content[2])
         res.send(content[2]);
     }
     else if(to==='hi'){
@@ -173,8 +175,10 @@ app.post('/inventory',async(req,res)=>{
             const transItem={
                 item:Item
             }
+            console.log("to "+to+"from "+from)
             const translatedItem=await TranslateHtmlElements(transItem,to,from)
-          //  console.log(translatedItem)
+            
+         console.log(translatedItem)
             qry="select * from Inventory where Item_name like '%"+translatedItem.item+"%' or Item_name like '%"+Item+"%'"
             res.send("post request accepted");
         }
@@ -317,4 +321,12 @@ router.post('/cartQuantity',async (req,res)=>{
 app.use(router);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
+});
+// Handle SIGINT for Ctrl + C
+process.on('SIGINT', () => {
+    console.log('Closing server...');
+    server.close(() => {
+        console.log('Server closed. Exiting process.');
+        process.exit(0);
+    });
 });

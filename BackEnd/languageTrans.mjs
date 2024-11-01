@@ -6,7 +6,7 @@ export function translate(stringText,from,to,callback){
         callback(null, stringText); // Directly pass stringText if it's not a string
         return;
     }
-    const childpython = spawn('python',['translator.py',from,to,stringText])
+    const childpython = spawn('python',['language_translator.py',from,to,stringText])
     var text=''
     childpython.stdout.on('data',(data)=>{
         
@@ -18,6 +18,7 @@ export function translate(stringText,from,to,callback){
             callback(null, text.trim()); // Pass translated text to the callback
             
         } else {
+            console.log('printing the trans')
             console.log(stringText);
             callback(null, stringText); 
             
