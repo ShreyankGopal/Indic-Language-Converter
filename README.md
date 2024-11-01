@@ -25,6 +25,15 @@ It has been made in a way that helps to add more languages without much changes 
 - https://wpastra.com/website-templates/ecommerce/ for the front end template
 
 ## How to run
+clone from the branch named Updat_branch
+create a virtual environment for the backend server to run.
+Install the dependencies
+```sh
+npm i
+```
+```sh
+pip install googletrans==4.0.0-rc1
+```
 ```sh 
 cd Backend
 nodemon MainPage.mjs
